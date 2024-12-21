@@ -1,14 +1,15 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import joblib
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 
 # Load the trained model and preprocessed data
 model_path = 'employee_promotion_model.h5'  # Replace with your saved model path
-model = Sequential()  # Replace this with `load_model(model_path)` if saved
-scaler = StandardScaler()  # Replace with your actual scaler instance
-label_encoders = {}  # Replace with your actual label encoders dictionary
+model = load_model('models\employee_promotion_model.h5')  # Replace this with `load_model(model_path)` if saved
+scaler = joblib.load('models\scaler.pkl')  # Replace with your actual scaler instance
+label_encoders = joblib.load('models\label_encoders.pkl')  # Replace with your actual label encoders dictionary
 
 # App title and description
 st.title("Employee Promotion Prediction")
@@ -39,16 +40,37 @@ recruitment_channel = st.sidebar.selectbox(
     ['linkedin', 'sourcing', 'other']
 )
 
-# Numerical inputs with sliders
-no_of_trainings = st.sidebar.slider('Number of Trainings', 0, 10, 2)
-age = st.sidebar.slider('Age', 20, 60, 30)
-previous_year_rating = st.sidebar.slider('Previous Year Rating', 0.0, 5.0, 3.0, step=0.1)
-length_of_service = st.sidebar.slider('Length of Service (Years)', 0, 20, 5)
-awards_won = st.sidebar.slider('Awards Won', 0, 5, 0)
-avg_training_score = st.sidebar.slider('Average Training Score', 50, 100, 75)
+def get_numerical_input(label, min_value, max_value, default_value):
+    """Function to get numerical input from the user."""
+    input_value = st.sidebar.text_input(
+        f"{label} (Range: {min_value}-{max_value})", 
+        value=str(default_value)
+    )
+    try:
+        input_value = float(input_value)
+        if input_value < min_value or input_value > max_value:
+            st.sidebar.warning(f"Please enter a value between {min_value} and {max_value} for {label}.")
+            return None
+        return input_value
+    except ValueError:
+        st.sidebar.warning(f"Please enter a valid number for {label}.")
+        return None
+
+employee_id = get_numerical_input('Employee_id', 1000,9999,1000)
+no_of_trainings = get_numerical_input('Number of Trainings', 0, 10, 2)
+age = get_numerical_input('Age', 20, 60, 30)
+previous_year_rating = get_numerical_input('Previous Year Rating', 0.0, 5.0, 3.0)
+length_of_service = get_numerical_input('Length of Service (Years)', 0, 20, 5)
+awards_won = get_numerical_input('Awards Won', 0, 5, 0)
+avg_training_score = get_numerical_input('Average Training Score', 50, 100, 75)
+
+# Check for valid inputs
+if None in [employee_id,no_of_trainings, age, previous_year_rating, length_of_service, awards_won, avg_training_score]:
+    st.sidebar.error("Please correct invalid inputs before proceeding.")
 
 # Collect user input into a dictionary
 user_input = {
+    'employee_id': employee_id,
     'department': department,
     'region': region,
     'education': education,
