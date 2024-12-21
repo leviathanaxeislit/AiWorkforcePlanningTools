@@ -7,9 +7,9 @@ from tensorflow.keras.models import Sequential, load_model
 
 # Load the trained model and preprocessed data
 model_path = 'employee_promotion_model.h5'  # Replace with your saved model path
-model = load_model('models\employee_promotion_model.h5')  # Replace this with `load_model(model_path)` if saved
-scaler = joblib.load('models\scaler.pkl')  # Replace with your actual scaler instance
-label_encoders = joblib.load('models\label_encoders.pkl')  # Replace with your actual label encoders dictionary
+model = load_model('models/employee_promotion_model.h5')  # Replace this with `load_model(model_path)` if saved
+scaler = joblib.load('models/scaler.pkl')  # Replace with your actual scaler instance
+label_encoders = joblib.load('models/label_encoders.pkl')  # Replace with your actual label encoders dictionary
 
 # App title and description
 st.title("Employee Promotion Prediction")
