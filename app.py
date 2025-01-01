@@ -6,5 +6,9 @@ with open( "styles/style.css" ) as css:
 
 # Main page
 st.title("AI WorkForce Planning Tools")
-st.write("Welcome to the AI WorkForce Planning Tools! Use the sidebar to navigate to different tools.")
+st.markdown("""AI Workforce Planning Tools is an advanced **AI-powered system** designed to enhance workforce management by utilizing machine learning models for **promotion prediction** and **job recommendation**. By leveraging AI, the tool helps organizations make informed decisions about employee promotions and match resumes with the most suitable job roles, improving workforce efficiency and planning.
 
+The project includes:
+- **Promotion Prediction Model**: Predicts employee promotions using a TensorFlow-based neural network model.
+- **Job Recommendation System**: Uses collaborative filtering to recommend jobs based on resume and job embeddings.""")
+st.write("Use the sidebar to navigate to different tools.")
