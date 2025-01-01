@@ -8,8 +8,6 @@ from tensorflow.keras.models import Sequential, load_model
 with open( "styles/style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
-
-
 # Sidebar inputs
 # Load the trained model and preprocessed data
 model_path = "employee_promotion_model.h5"  # Replace with your saved model path

@@ -3,3 +3,7 @@ tensorflow
 pandas
 scikit-learn
 joblib
+torch
+sentence-transformers
+tf-keras
+gdown
