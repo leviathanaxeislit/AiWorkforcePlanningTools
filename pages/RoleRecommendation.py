@@ -81,6 +81,24 @@ def parse_pdf(file):
         st.error(f"Error parsing PDF: {e}")
         return None
 
+# Extract unique skills from the resume text
+def extract_skills(resume_text, skill_keywords):
+    found_skills = set()  # Use a set to handle duplicates
+    for skill in skill_keywords:
+        if skill.lower() in resume_text.lower():
+            found_skills.add(skill)  # Add skills to the set
+    return sorted(found_skills)  # Return a sorted list of unique skills
+
+# Load skill keywords
+@st.cache_resource(show_spinner="Loading skill keywords...")
+def load_skill_keywords():
+    skill_keywords_file = "models/skill_keywords.txt"
+    # skill_keywords_file_id = "your_skill_keywords_file_id_here"  # Replace with your file ID
+    # download_file_from_drive(skill_keywords_file_id, skill_keywords_file)
+
+    with open(skill_keywords_file, 'r') as file:
+        return [line.strip() for line in file.readlines()]
+
 # Load job embeddings and recommendation model
 with st.spinner("Loading job embeddings..."):
     df, job_tensors = load_job_embeddings()
@@ -99,10 +117,12 @@ embed_model = SentenceTransformer('all-MiniLM-L6-v2')
 st.title("Role Recommendation System")
 st.write("Upload your resume (PDF) or paste your resume below to find matching Roles!")
 
+# Load skill keywords
+skill_keywords = load_skill_keywords()
+
 # Resume input (Upload or text area)
 pasted_text = st.text_area("Or paste your resume text below:", height=200)
 uploaded_file = st.file_uploader("Upload your resume (PDF only)", type=["pdf"])
-
 
 resume_text = None
 
@@ -115,6 +135,15 @@ elif pasted_text.strip():
     resume_text = pasted_text
     st.markdown("### Entered Resume Text")
     st.markdown(f"```text\n{resume_text}\n```")
+
+# Extract and display unique skills
+if resume_text:
+    skills = extract_skills(resume_text, skill_keywords)
+    st.markdown("### Extracted Skills")
+    if skills:
+        st.markdown(", ".join(skills))
+    else:
+        st.markdown("No skills matched from the predefined list.")
 
 # Progress bar example (optional for embedding generation)
 progress = st.progress(0)
