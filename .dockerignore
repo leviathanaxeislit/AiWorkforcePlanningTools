@@ -1,0 +1,44 @@
+# Hidden files
+.DS_Store
+.git
+.vscode
+.venv
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.so
+
+# Testing related files
+.pytest_cache/
+test*/
+coverage/
+
+# Local configuration files
+.env
+.env.*
+
+# IDE-specific files
+*.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Virtual environments
+venv/
+env/
+new_env/
+
+# Pip installation files
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebook related files
+.ipynb
+
+# IDE-specific files (example for PyCharm)
+*.idea/
