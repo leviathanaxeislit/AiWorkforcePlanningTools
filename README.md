@@ -4,21 +4,25 @@
 # AI Workforce Planning Tools
 
 [![AI Workforce Planning](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aiworkforceplanningtool.streamlit.app/) 
+[![Docker Pulls](https://img.shields.io/docker/pulls/leviathanaxeislit/aiworkforceplanningtools?style=plastic&logo=docker&logoColor=blue&logoSize=auto)](https://hub.docker.com/repository/docker/leviathanaxeislit/aiworkforceplanningtools/general)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/leviathanaxeislit/AiWorkforcePlanningTools?style=plastic&logo=github)
+![GitHub License](https://img.shields.io/github/license/leviathanaxeislit/AiWorkforcePlanningTools?style=plastic&logo=apachelucene)
+![Docker Image Size](https://img.shields.io/docker/image-size/leviathanaxeislit/aiworkforceplanningtools?arch=amd64&style=plastic&logo=docker)
 
 ## Overview
 
-AI Workforce Planning Tools is an advanced **AI-powered system** designed to enhance workforce management by utilizing machine learning models for **promotion prediction** and **job recommendation**. By leveraging AI, the tool helps organizations make informed decisions about employee promotions and match resumes with the most suitable job roles, improving workforce efficiency and planning.
+AI Workforce Planning Tools is an advanced **AI-powered system** designed to enhance workforce management by utilizing machine learning models for **promotion prediction** and **role recommendation**. By leveraging AI, the tool helps organizations make informed decisions about employee promotions and match resumes with the most suitable roles, improving workforce efficiency and planning.
 
 The project includes:
 - **Promotion Prediction Model**: Predicts employee promotions using a TensorFlow-based neural network model.
-- **Job Recommendation System**: Uses collaborative filtering to recommend jobs based on resume and job embeddings.
+- **Role Recommendation System**: Uses collaborative filtering to recommend roles based on resume and job embeddings.
 
 [**Open the Streamlit app**](https://aiworkforceplanningtool.streamlit.app/)
 
 ## Features
 
 - **Promotion Prediction**: Helps predict the likelihood of employee promotions based on various parameters, including job satisfaction, salary hike, and job level.
-- **Job Role Recommendations**: Matches resumes with job roles based on job embeddings and resume embeddings.
+- **Role Recommendations**: Matches resumes with job roles based on job embeddings and resume embeddings.
 - **Streamlit Interface**: User-friendly web interface for interacting with the models.
 - **Model Integration**: Utilizes state-of-the-art machine learning models built with TensorFlow and PyTorch.
 
@@ -69,7 +73,7 @@ This will start the application, and you can access it through your browser at `
 - **Accuracy**: Achieved an average accuracy of ~75% during training and testing.
 - **Implementation**: Built using a neural network with fully connected layers to process various features and predict promotion likelihood.
 
-### 2. Job Recommendation System
+### 2. Role Recommendation System
 - **Method**: Collaborative Filtering
 - **Purpose**: Recommending suitable job roles based on the job and resume embeddings.
 - **Deployment**: Built as a Streamlit app, allowing users to paste their resume and receive job recommendations.
