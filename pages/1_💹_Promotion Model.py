@@ -5,6 +5,20 @@ import joblib
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from tensorflow.keras.models import Sequential, load_model
 
+
+st.set_page_config(
+    page_title="Promotion Model",
+    page_icon="https://cdn2.iconfinder.com/data/icons/knowledge-promotion-3/64/career_leadership_learn_development_growth_motivation-256.png",
+    initial_sidebar_state="expanded",
+    
+)
+
+st.image(
+    image="https://pulsemotivation.com/wp-content/uploads/2022/02/Pulse-Motivation-Employee-engagement-strategy%E2%80%A8.gif",
+    use_container_width="auto",
+    caption="Employee Promotion Model"
+)
+
 with open( "styles/style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 

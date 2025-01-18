@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Ai Workforce Planning Tool",
-    page_icon="https://cdn2.iconfinder.com/data/icons/artificial-intelligence-6/64/ArtificialIntelligence19-512.png",
+    page_icon="https://www.commercient.com/wp-content/uploads/2019/12/deepLearning.gif",
     initial_sidebar_state="collapsed",
     
 )
@@ -12,6 +12,7 @@ with open("styles/style.css") as css:
 
 # Main page
 st.title("Ai WorkForce Planning Tools")
+st.image(image="https://gifdb.com/images/high/ai-finger-print-recognition-zl4ku51ojamo22k9.gif")
 st.markdown(
     """
             AI Workforce Planning Tools is an advanced **AI-powered system** designed to enhance workforce management by utilizing machine learning models for **promotion prediction** and **role recommendation**. By leveraging AI, the tool helps organizations make informed decisions about employee promotions and match resumes with the most suitable roles, improving workforce efficiency and planning.

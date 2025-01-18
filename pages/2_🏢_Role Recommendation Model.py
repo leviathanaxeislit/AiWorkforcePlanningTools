@@ -5,16 +5,33 @@ from sentence_transformers import SentenceTransformer
 import gdown
 import os
 from PyPDF2 import PdfReader
+import time
+st.set_page_config(
+    page_title="Role Recommendation Model",
+    page_icon="https://www.careerguide.com/career/wp-content/uploads/2021/01/a2413959910293.5a33a9bde96e8.gif",
+    initial_sidebar_state="collapsed",
+    
+)
+st.image(image="https://www.careerguide.com/career/wp-content/uploads/2021/01/a2413959910293.5a33a9bde96e8.gif", use_container_width=True)
+
+with open( "styles/style.css" ) as css:
+    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
 # Helper function to download files from Google Drive and save to a specified location
 def download_file_from_drive(file_id, destination):
     os.makedirs(os.path.dirname(destination), exist_ok=True)
     if not os.path.exists(destination):
+        message_placeholder = st.empty()
         with st.spinner(f"Downloading {destination}..."):
             gdown.download(f"https://drive.google.com/uc?id={file_id}", destination, quiet=False)
-            st.info(f"Downloaded {destination} successfully.")
+        message_placeholder.info(f"Downloaded {destination} successfully.")
+        time.sleep(2)
+        message_placeholder.empty()
     else:
-        st.success(f"File {destination} already exists, skipping download.")
+        message_placeholder = st.empty() #Create placeholder for existing file message
+        message_placeholder.success(f"File {destination} already exists, skipping download.")
+        time.sleep(2)
+        message_placeholder.empty() #Clear the message
 
 # Define the collaborative filtering model
 class CollaborativeFiltering(torch.nn.Module):
@@ -145,30 +162,32 @@ if resume_text:
     else:
         st.markdown("No skills matched from the predefined list.")
 
-# Progress bar example (optional for embedding generation)
+
 progress = st.progress(0)
 
 if st.button("Recommend Roles"):
     if resume_text is not None and resume_text.strip() != "":
-        progress.progress(10)
         with st.spinner('Generating resume embedding...'):
             resume_embedding = torch.tensor(embed_model.encode(resume_text), dtype=torch.float).unsqueeze(0)
-        progress.progress(50)
 
         with st.spinner('Recommending Roles...'):
-            def recommend_jobs(resume_embedding, job_tensors, top_n=5):
+            def recommend_jobs(resume_embedding, job_tensors, df, top_n=5):
                 similarities = torch.nn.functional.cosine_similarity(resume_embedding, job_tensors)
                 _, top_indices = torch.topk(similarities, top_n)
-                return top_indices
 
-            # Get top job recommendations
-            top_indices = recommend_jobs(resume_embedding, job_tensors, top_n=5)
-            recommended_jobs = df.iloc[top_indices.tolist()]['Title']
-        progress.progress(100)
+                recommended_jobs = []
+                for index in top_indices:
+                    job_index = index.item()
+                    job_title = df.iloc[job_index]['Title']
+                    #Simplified suitability score based on cosine similarity:
+                    score = similarities[index].item() * 100
+                    recommended_jobs.append((job_title, score))
+                return recommended_jobs
 
-        # Display recommended jobs
-        st.success("Recommended Roles:")
-        for idx, job in enumerate(recommended_jobs, 1):
-            st.markdown(f"**{idx}. {job}**")
+            recommended_jobs = recommend_jobs(resume_embedding, job_tensors, df, top_n=5)
+
+            st.success("Recommended Roles:")
+            for job_title, score in recommended_jobs:
+                st.markdown(f"**{job_title}** - Suitability Score: {score:.1f}")
     else:
         st.warning("Please upload a valid PDF or paste your resume to see recommendations!")
