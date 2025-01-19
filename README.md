@@ -8,6 +8,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/leviathanaxeislit/AiWorkforcePlanningTools?style=plastic&logo=github)
 ![GitHub License](https://img.shields.io/github/license/leviathanaxeislit/AiWorkforcePlanningTools?style=plastic&logo=apachelucene)
 ![Docker Image Size](https://img.shields.io/docker/image-size/leviathanaxeislit/aiworkforceplanningtools?arch=amd64&style=plastic&logo=docker)
+[![AiWorkforcePlanningTools](https://github.com/leviathanaxeislit/AiWorkforcePlanningTools/actions/workflows/main.yml/badge.svg)](https://github.com/leviathanaxeislit/AiWorkforcePlanningTools/actions/workflows/main.yml)
 
 ## Overview
 
