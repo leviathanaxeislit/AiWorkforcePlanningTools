@@ -10,17 +10,21 @@ st.set_page_config(
     page_title="Promotion Model",
     page_icon="https://cdn2.iconfinder.com/data/icons/knowledge-promotion-3/64/career_leadership_learn_development_growth_motivation-256.png",
     initial_sidebar_state="expanded",
-    
 )
-
+st.markdown(
+    """
+            <p style="font-size: 35px; font-family: 'Orbitron', sans-serif;font-weight: bold; color: yellow;">Employee Promotion Prediction</p>
+            """,
+    unsafe_allow_html=True,
+)
 st.image(
     image="https://pulsemotivation.com/wp-content/uploads/2022/02/Pulse-Motivation-Employee-engagement-strategy%E2%80%A8.gif",
     use_container_width="auto",
-    caption="Employee Promotion Model"
+    caption="Employee Promotion Model",
 )
 
-with open( "styles/style.css" ) as css:
-    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
+with open("styles/style.css") as css:
+    st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
 # Sidebar inputs
 # Load the trained model and preprocessed data
@@ -34,7 +38,7 @@ label_encoders = joblib.load(
 )  # Replace with your actual label encoders dictionary
 
 # App title and description
-st.title("Employee Promotion Prediction")
+
 st.write(
     "Use this tool to predict the likelihood of an employee being promoted based on their profile and performance data."
 )
