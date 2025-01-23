@@ -3,10 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
 
+
 /* Apply the Montserrat font to the entire Streamlit app */
 html, body, [class*="st"] {
     font-family: 'Quantico', serif;
 }
-h1{
-    font-family: 'Quantico', serif;
-}
+

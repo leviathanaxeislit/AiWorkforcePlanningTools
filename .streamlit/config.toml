@@ -1,0 +1,6 @@
+[theme]
+backgroundColor = "#100020" # Deep purple-black
+secondaryBackgroundColor = "#000000" # Pure Black
+textColor = "#FF1493" # Neon Pink
+font = "monospace" # Or another monospace font
+primaryColor = "#00FFFF" # Neon Blue 
