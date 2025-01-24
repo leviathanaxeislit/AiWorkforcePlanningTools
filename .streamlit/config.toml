@@ -1,6 +1,6 @@
 [theme]
-backgroundColor = "#100020" # Deep purple-black
-secondaryBackgroundColor = "#000000" # Pure Black
-textColor = "#FF1493" # Neon Pink
-font = "monospace" # Or another monospace font
-primaryColor = "#00FFFF" # Neon Blue 
+primaryColor="#2980B9"  # A nice blue
+backgroundColor="#F7DC6F" # A light, yellowish background
+textColor="#1A5276" # Dark blue text - good contrast against background
+font="Arial" # A clean sans-serif font, or use your preference
+secondaryBackgroundColor="#85C1E9" # Lighter blue for secondary elements
