@@ -1,6 +1,6 @@
 [theme]
-primaryColor="#2980B9"  # A nice blue
-backgroundColor="#F7DC6F" # A light, yellowish background
-textColor="#1A5276" # Dark blue text - good contrast against background
-font="Arial" # A clean sans-serif font, or use your preference
-secondaryBackgroundColor="#85C1E9" # Lighter blue for secondary elements
+primaryColor="#B20710"  
+backgroundColor="#0E0E0E" 
+textColor="#FFFFFF" 
+font="sans serif" 
+secondaryBackgroundColor="#1A1A1A" 

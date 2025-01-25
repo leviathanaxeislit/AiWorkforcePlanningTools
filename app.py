@@ -11,7 +11,7 @@ with open("styles/style.css") as css:
 
 # Main page
 st.markdown("""
-            <p style="font-size: 40px; font-family: 'Gugi', serif;font-weight: 400;">AI WORKFORCE PLANNING TOOLS</p>
+            <p style="font-size: 40px; font-family: 'Gugi', serif;font-weight: 400;border-radius: 2px;">AI WORKFORCE PLANNING TOOLS</p>
             """,unsafe_allow_html=True)
 st.image(
     image="https://gifdb.com/images/high/ai-finger-print-recognition-zl4ku51ojamo22k9.gif"

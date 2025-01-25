@@ -13,7 +13,7 @@ st.set_page_config(
 )
 st.markdown(
     """
-            <p style="font-size: 40px; font-family: 'Gugi', serif;font-weight: 400;">Employee Promotion Prediction</p>
+            <p style="font-size: 40px; font-family: 'Gugi', serif;font-weight: 400;">EMPLOYEE PROMOTION PREDICTION</p>
             """,
     unsafe_allow_html=True,
 )

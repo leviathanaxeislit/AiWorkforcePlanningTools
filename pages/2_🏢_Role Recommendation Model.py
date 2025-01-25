@@ -145,7 +145,7 @@ embed_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 st.markdown(
     """
-            <p style="font-size: 35px; font-family: 'Gugi', serif;font-weight: 400;">Role Recommendation System</p>
+            <p style="font-size: 35px; font-family: 'Gugi', serif;font-weight: 400;">ROLE RECOMMENDATION SYSTEM</p>
             """,
     unsafe_allow_html=True,
 )
