@@ -19,19 +19,25 @@ try:
     with cols[0]:
         st.page_link(page="app.py", icon="🏠", label="Home")
     with cols[1]:
-        st.page_link(page="pages/Promotion Model.py", icon="💹", label="Promotion Model")
+        st.page_link(
+            page="pages/Promotion Model.py", icon="💹", label="Promotion Model"
+        )
     with cols[2]:
-        st.page_link(page="pages/Role Recommendation Model.py", icon="🏢", label="Role Recommendation")
+        st.page_link(
+            page="pages/Role Recommendation Model.py",
+            icon="🏢",
+            label="Role Recommendation",
+        )
 except Exception as e:
     st.error(f"Error loading page links: {e}")
-  
+
 st.markdown(
     """
             <p style="font-size: 35px; font-family: 'Gugi', serif;font-weight: 400;">ROLE RECOMMENDATION SYSTEM</p>
             """,
     unsafe_allow_html=True,
 )
-  
+
 st.image(
     image="https://www.careerguide.com/career/wp-content/uploads/2021/01/a2413959910293.5a33a9bde96e8.gif",
     use_container_width=True,

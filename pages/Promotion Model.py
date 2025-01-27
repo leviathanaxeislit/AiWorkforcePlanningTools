@@ -17,9 +17,15 @@ try:
     with cols[0]:
         st.page_link(page="app.py", icon="🏠", label="Home")
     with cols[1]:
-        st.page_link(page="pages/Promotion Model.py", icon="💹", label="Promotion Model")
+        st.page_link(
+            page="pages/Promotion Model.py", icon="💹", label="Promotion Model"
+        )
     with cols[2]:
-        st.page_link(page="pages/Role Recommendation Model.py", icon="🏢", label="Role Recommendation")
+        st.page_link(
+            page="pages/Role Recommendation Model.py",
+            icon="🏢",
+            label="Role Recommendation",
+        )
 except Exception as e:
     st.error(f"Error loading page links: {e}")
 
@@ -45,7 +51,9 @@ try:
     scaler = joblib.load("models/scaler.pkl")
     label_encoders = joblib.load("models/label_encoders.pkl")
 except FileNotFoundError:
-    st.error("Error: Model files not found. Please ensure 'models' folder exists and contains the necessary files.")
+    st.error(
+        "Error: Model files not found. Please ensure 'models' folder exists and contains the necessary files."
+    )
     st.stop()  # Stop execution if model files are missing
 except Exception as e:
     st.error(f"An error occurred loading the model: {e}")
@@ -57,9 +65,12 @@ st.write(
     "Use this tool to predict the likelihood of an employee being promoted based on their profile and performance data."
 )
 
-st.markdown("""
+st.markdown(
+    """
             <p style="font-size: 35px;font-weight: bold;">  Input Employee Details</p>
-            """,unsafe_allow_html=True)
+            """,
+    unsafe_allow_html=True,
+)
 
 
 def get_numerical_input(label, min_value, max_value, default_value):
@@ -180,6 +191,7 @@ user_input = {
     "awards_won": awards_won,
     "avg_training_score": avg_training_score,
 }
+
 
 def preprocess_input(user_input, scaler, label_encoders):
     for col in label_encoders.keys():

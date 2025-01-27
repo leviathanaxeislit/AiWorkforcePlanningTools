@@ -6,9 +6,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 /* Apply the Montserrat font to the entire Streamlit app */
-html, body, [class*="st"] {
+html,
+body,
+[class*="st"] {
     font-family: 'Outfit', serif;
     font-weight: 400;
     font-size: large;
 }
-

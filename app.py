@@ -15,20 +15,28 @@ try:
     with cols[0]:
         st.page_link(page="app.py", icon="🏠", label="Home")
     with cols[1]:
-        st.page_link(page="pages/Promotion Model.py", icon="💹", label="Promotion Model")
+        st.page_link(
+            page="pages/Promotion Model.py", icon="💹", label="Promotion Model"
+        )
     with cols[2]:
-        st.page_link(page="pages/Role Recommendation Model.py", icon="🏢", label="Role Recommendation")
+        st.page_link(
+            page="pages/Role Recommendation Model.py",
+            icon="🏢",
+            label="Role Recommendation",
+        )
 except Exception as e:
     st.error(f"Error loading page links: {e}")
 
 # Main page
-st.markdown("""
+st.markdown(
+    """
             <p style="font-size: 40px; font-family: 'Gugi', serif;font-weight: 400;border-radius: 2px;">AI WORKFORCE PLANNING TOOLS</p>
-            """,unsafe_allow_html=True)
+            """,
+    unsafe_allow_html=True,
+)
 st.image(
     image="https://gifdb.com/images/high/ai-finger-print-recognition-zl4ku51ojamo22k9.gif"
 )
-
 
 
 st.markdown(
