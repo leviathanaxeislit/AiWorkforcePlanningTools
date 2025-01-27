@@ -12,6 +12,19 @@ st.set_page_config(
     page_icon="https://www.careerguide.com/career/wp-content/uploads/2021/01/a2413959910293.5a33a9bde96e8.gif",
     initial_sidebar_state="collapsed",
 )
+
+cols = st.columns(3)  # Create 3 columns
+
+try:
+    with cols[0]:
+        st.page_link(page="app.py", icon="🏠", label="Home")
+    with cols[1]:
+        st.page_link(page="pages/Promotion Model.py", icon="💹", label="Promotion Model")
+    with cols[2]:
+        st.page_link(page="pages/Role Recommendation Model.py", icon="🏢", label="Role Recommendation")
+except Exception as e:
+    st.error(f"Error loading page links: {e}")
+    
 st.image(
     image="https://www.careerguide.com/career/wp-content/uploads/2021/01/a2413959910293.5a33a9bde96e8.gif",
     use_container_width=True,

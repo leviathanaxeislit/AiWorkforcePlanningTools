@@ -2,15 +2,27 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-from sklearn.preprocessing import StandardScaler, LabelEncoder
 from tensorflow.keras.models import Sequential, load_model
-
 
 st.set_page_config(
     page_title="Promotion Model",
     page_icon="https://cdn2.iconfinder.com/data/icons/knowledge-promotion-3/64/career_leadership_learn_development_growth_motivation-256.png",
-    initial_sidebar_state="expanded",
+    # initial_sidebar_state="expanded",  #Optional: remove or uncomment as needed.
 )
+
+# --- Navigation Bar ---
+cols = st.columns(3)  # Create 3 columns
+
+try:
+    with cols[0]:
+        st.page_link(page="app.py", icon="🏠", label="Home")
+    with cols[1]:
+        st.page_link(page="pages/Promotion Model.py", icon="💹", label="Promotion Model")
+    with cols[2]:
+        st.page_link(page="pages/Role Recommendation Model.py", icon="🏢", label="Role Recommendation")
+except Exception as e:
+    st.error(f"Error loading page links: {e}")
+
 st.markdown(
     """
             <p style="font-size: 40px; font-family: 'Gugi', serif;font-weight: 400;">EMPLOYEE PROMOTION PREDICTION</p>
@@ -26,28 +38,50 @@ st.image(
 with open("styles/style.css") as css:
     st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
-# Sidebar inputs
-# Load the trained model and preprocessed data
-model_path = "employee_promotion_model.h5"  # Replace with your saved model path
-model = load_model(
-    "models/employee_promotion_model.h5"
-)  # Replace this with `load_model(model_path)` if saved
-scaler = joblib.load("models/scaler.pkl")  # Replace with your actual scaler instance
-label_encoders = joblib.load(
-    "models/label_encoders.pkl"
-)  # Replace with your actual label encoders dictionary
+# --- Model Loading and Preprocessing ---
+model_path = "models/employee_promotion_model.h5"
+try:
+    model = load_model(model_path)
+    scaler = joblib.load("models/scaler.pkl")
+    label_encoders = joblib.load("models/label_encoders.pkl")
+except FileNotFoundError:
+    st.error("Error: Model files not found. Please ensure 'models' folder exists and contains the necessary files.")
+    st.stop()  # Stop execution if model files are missing
+except Exception as e:
+    st.error(f"An error occurred loading the model: {e}")
+    st.stop()
 
-# App title and description
 
+# --- Input Fields (Now in Main Content) ---
 st.write(
     "Use this tool to predict the likelihood of an employee being promoted based on their profile and performance data."
 )
 
-# Sidebar inputs
-st.sidebar.header("Input Employee Details")
+st.markdown("""
+            <p style="font-size: 35px;font-weight: bold;">  Input Employee Details</p>
+            """,unsafe_allow_html=True)
 
-# Categorical inputs with dropdown menus
-department = st.sidebar.selectbox(
+
+def get_numerical_input(label, min_value, max_value, default_value):
+    input_value = st.text_input(
+        f"{label} (Range: {min_value}-{max_value})", value=str(default_value)
+    )
+    try:
+        input_value = float(input_value)
+        if input_value < min_value or input_value > max_value:
+            st.warning(
+                f"Please enter a value between {min_value} and {max_value} for {label}."
+            )
+            return None
+        return input_value
+    except ValueError:
+        st.warning(f"Please enter a valid number for {label}.")
+        return None
+
+
+# Input fields (moved to main content)
+employee_id = get_numerical_input("Employee ID", 1000, 9999, 1000)
+department = st.selectbox(
     "Department",
     [
         "Sales & Marketing",
@@ -61,7 +95,7 @@ department = st.sidebar.selectbox(
         "Legal",
     ],
 )
-region = st.sidebar.selectbox(
+region = st.selectbox(
     "Region",
     [
         "Bangalore",
@@ -100,42 +134,22 @@ region = st.sidebar.selectbox(
         "Shimla",
     ],
 )
-education = st.sidebar.selectbox(
+education = st.selectbox(
     "Education Level",
     ["Master's & above", "Bachelor's", "Below Secondary", "Master's", "High School"],
 )
-gender = st.sidebar.selectbox("Gender", ["m", "f"])
-recruitment_channel = st.sidebar.selectbox(
+gender = st.selectbox("Gender", ["m", "f"])
+recruitment_channel = st.selectbox(
     "Recruitment Channel",
     ["linkedin", "sourcing", "other", "Naukri", "Indeed", "referred"],
 )
-
-
-def get_numerical_input(label, min_value, max_value, default_value):
-    """Function to get numerical input from the user."""
-    input_value = st.sidebar.text_input(
-        f"{label} (Range: {min_value}-{max_value})", value=str(default_value)
-    )
-    try:
-        input_value = float(input_value)
-        if input_value < min_value or input_value > max_value:
-            st.sidebar.warning(
-                f"Please enter a value between {min_value} and {max_value} for {label}."
-            )
-            return None
-        return input_value
-    except ValueError:
-        st.sidebar.warning(f"Please enter a valid number for {label}.")
-        return None
-
-
-employee_id = get_numerical_input("Employee_id", 1000, 9999, 1000)
 no_of_trainings = get_numerical_input("Number of Trainings", 0, 10, 2)
 age = get_numerical_input("Age", 20, 60, 30)
 previous_year_rating = get_numerical_input("Previous Year Rating", 0.0, 5.0, 3.0)
 length_of_service = get_numerical_input("Length of Service (Years)", 0, 20, 5)
 awards_won = get_numerical_input("Awards Won", 0, 5, 0)
 avg_training_score = get_numerical_input("Average Training Score", 50, 100, 75)
+
 
 # Check for valid inputs
 if None in [
@@ -147,9 +161,11 @@ if None in [
     awards_won,
     avg_training_score,
 ]:
-    st.sidebar.error("Please correct invalid inputs before proceeding.")
+    st.error("Please correct invalid inputs before proceeding.")
+    st.stop()
 
-# Collect user input into a dictionary
+# --- Data Preprocessing and Prediction ---
+
 user_input = {
     "employee_id": employee_id,
     "department": department,
@@ -165,14 +181,10 @@ user_input = {
     "avg_training_score": avg_training_score,
 }
 
-
-# Preprocess user input
 def preprocess_input(user_input, scaler, label_encoders):
     for col in label_encoders.keys():
         if user_input[col] not in label_encoders[col].classes_:
-            user_input[col] = label_encoders[col].classes_[
-                0
-            ]  # Default to the first class for unseen values
+            user_input[col] = label_encoders[col].classes_[0]
 
     user_df = pd.DataFrame([user_input])
     for col in label_encoders.keys():
@@ -181,7 +193,6 @@ def preprocess_input(user_input, scaler, label_encoders):
     return scaled_features
 
 
-# Feature importance explanation
 def generate_detailed_explanation(user_input, prediction_probability, feature_weights):
     top_features = sorted(feature_weights.items(), key=lambda x: x[1], reverse=True)[:5]
     explanation = f"Prediction: The employee's likelihood of promotion is {prediction_probability:.2f}.\n\n"
@@ -196,7 +207,6 @@ def generate_detailed_explanation(user_input, prediction_probability, feature_we
     return explanation
 
 
-# Feature weight extraction
 def get_feature_weights(model, feature_names):
     first_layer_weights = model.layers[0].get_weights()[0]
     average_weights = np.mean(np.abs(first_layer_weights), axis=1)
@@ -207,23 +217,21 @@ def get_feature_weights(model, feature_names):
     return sorted_features
 
 
-# Prediction button
-if st.sidebar.button("Predict Promotion"):
-    # Preprocess input
-    preprocessed_input = preprocess_input(user_input, scaler, label_encoders)
-    prediction_probability = model.predict(preprocessed_input)[0][0]
+# --- Prediction Button and Results ---
+if st.button("Predict Promotion"):
+    try:
+        preprocessed_input = preprocess_input(user_input, scaler, label_encoders)
+        prediction_probability = model.predict(preprocessed_input)[0][0]
+        feature_names = list(user_input.keys())
+        feature_weights = get_feature_weights(model, feature_names)
+        explanation = generate_detailed_explanation(
+            user_input, prediction_probability, feature_weights
+        )
 
-    # Get feature weights
-    feature_names = list(user_input.keys())
-    feature_weights = get_feature_weights(model, feature_names)
+        st.subheader("Prediction Results")
+        st.write(f"Promotion Likelihood: {prediction_probability:.2f}")
+        st.subheader("Detailed Explanation")
+        st.write(explanation)
 
-    # Generate explanation
-    explanation = generate_detailed_explanation(
-        user_input, prediction_probability, feature_weights
-    )
-
-    # Display results
-    st.subheader("Prediction Results")
-    st.write(f"Promotion Likelihood: {prediction_probability:.2f}")
-    st.subheader("Detailed Explanation")
-    st.write(explanation)
+    except Exception as e:
+        st.error(f"An error occurred during prediction: {e}")
