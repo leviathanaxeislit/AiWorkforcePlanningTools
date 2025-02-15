@@ -6,6 +6,7 @@ import gdown
 import os
 from PyPDF2 import PdfReader
 import time
+import urllib.parse
 
 st.set_page_config(
     page_title="Role Recommendation Model",
@@ -158,6 +159,20 @@ def recommend_jobs(resume_embedding, job_tensors, df, top_n=5):
         recommended_jobs.append((job_title, score))
     return recommended_jobs
 
+# --- New Function to Generate LinkedIn Job Search URL ---
+def generate_linkedin_job_search_url(job_title, skills):
+    """Generates a LinkedIn job search URL for a specific job title and skills."""
+    keywords = f"{job_title}, " + ", ".join(skills)
+    encoded_keywords = urllib.parse.quote_plus(keywords)
+    linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_keywords}&location=India"
+    return linkedin_url
+
+def generate_naukri_job_search_url(job_title):
+    """Generates a Naukri job search URL for a specific job title."""
+    keywords = job_title  # Using only the job title for Naukri search
+    encoded_keywords = urllib.parse.quote_plus(keywords)
+    naukri_url = f"https://www.naukri.com/{encoded_keywords}-jobs?k={encoded_keywords}&nignbevent_src=jobsearchDeskGNB"
+    return naukri_url
 
 # Load necessary components BEFORE tabs
 df, job_tensors = load_job_embeddings()
@@ -203,9 +218,15 @@ with tabs[0]:
                         )
                         st.success("Recommended Roles:")
                         for job_title, score in recommended_jobs:
+                            linkedin_url = generate_linkedin_job_search_url(
+                                job_title, skills
+                            )  # Generate LinkedIn URL
+                            naukri_url = generate_naukri_job_search_url(
+                                job_title
+                            )  # Generate Naukri URL
                             st.markdown(
-                                f"**{job_title}** - Suitability Score: {score:.1f}"
-                            )
+                                f"**{job_title}** - Suitability Score: {score:.1f}  [LinkedIn Jobs]({linkedin_url}) [Naukri Jobs]({naukri_url})"
+                            )  # Display with links
                 else:
                     st.warning("Please upload a valid PDF resume.")
         else:
