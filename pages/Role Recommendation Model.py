@@ -44,6 +44,15 @@ st.image(
     use_container_width=True,
 )
 
+# Add Font Awesome CSS and Javascript (Important!)
+st.markdown(
+    """
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/a838ad3310.js" crossorigin="anonymous"></script>
+    """,
+    unsafe_allow_html=True,
+)
+
 with open("styles/style.css") as css:
     st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
@@ -159,20 +168,24 @@ def recommend_jobs(resume_embedding, job_tensors, df, top_n=5):
         recommended_jobs.append((job_title, score))
     return recommended_jobs
 
+
 # --- New Function to Generate LinkedIn Job Search URL ---
 def generate_linkedin_job_search_url(job_title):
     """Generates a LinkedIn job search URL for a specific job title."""
     keywords = job_title  # Only job title for LinkedIn
     encoded_keywords = urllib.parse.quote_plus(keywords)
-    linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_keywords}&location=India"
+    linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_keywords}&location=Worldwide"
     return linkedin_url
 
+
+# --- New Function to Generate Naukri Job Search URL ---
 def generate_naukri_job_search_url(job_title):
     """Generates a Naukri job search URL for a specific job title."""
     keywords = job_title  # Using only the job title for Naukri search
     encoded_keywords = urllib.parse.quote_plus(keywords)
     naukri_url = f"https://www.naukri.com/{encoded_keywords}-jobs?k={encoded_keywords}&nignbevent_src=jobsearchDeskGNB"
     return naukri_url
+
 
 # Load necessary components BEFORE tabs
 df, job_tensors = load_job_embeddings()
@@ -183,7 +196,6 @@ if model is None:
     st.stop()
 skill_keywords = load_skill_keywords()
 embed_model = SentenceTransformer("all-MiniLM-L6-v2")
-
 
 tabs = st.tabs(["Resume Upload", "Job Description Scoring"])
 
@@ -199,7 +211,7 @@ with tabs[0]:
         if resume_text:
             st.markdown("### Extracted Resume Text")
             st.markdown(f"```text\n{resume_text}\n```")
-            skills = extract_skills(resume_text, skill_keywords)
+            skills = extract_skills(resume_text, skill_keywords)  # skills is used to extract keywords
             st.markdown("### Extracted Skills")
             if skills:
                 st.markdown(", ".join(skills))
@@ -217,16 +229,53 @@ with tabs[0]:
                             resume_embedding, job_tensors, df, top_n=5
                         )
                         st.success("Recommended Roles:")
-                        for job_title, score in recommended_jobs:
-                            linkedin_url = generate_linkedin_job_search_url(
-                                job_title
-                            )  # Generate LinkedIn URL
-                            naukri_url = generate_naukri_job_search_url(
-                                job_title
-                            )  # Generate Naukri URL
-                            st.markdown(
-                                f"**{job_title}** - Suitability Score: {score:.1f}  [LinkedIn Jobs]({linkedin_url}) [Naukri Jobs]({naukri_url})"
-                            )  # Display with links
+                        for i, (job_title, score) in enumerate(recommended_jobs):
+                            linkedin_url = generate_linkedin_job_search_url(job_title)
+                            naukri_url = generate_naukri_job_search_url(job_title)
+
+                            st.write(f"**{job_title}** - Suitability Score: {score:.1f}")
+
+                            col1, col2 = st.columns(2)  # Create 2 columns
+                            with col1:
+                                linkedin_button = f"""
+                                    <a href="{linkedin_url}" target="_blank">
+                                        <button style="
+                                            background-color: #0077B5; /* LinkedIn Blue */
+                                            border: none;
+                                            color: white;
+                                            padding: 10px 20px;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            cursor: pointer;
+                                            border-radius: 5px;
+                                        "><i class="fab fa-linkedin"></i> LinkedIn Jobs
+                                        </button>
+                                    </a>
+                                    """
+                                st.markdown(linkedin_button, unsafe_allow_html=True)
+
+                            with col2:
+                                naukri_button = f"""
+                                    <a href="{naukri_url}" target="_blank">
+                                        <button style="
+                                            background-color: #E07A5F; /* Naukri Orange/Red */
+                                            border: none;
+                                            color: white;
+                                            padding: 10px 20px;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            cursor: pointer;
+                                            border-radius: 5px;
+                                        "><i class="fas fa-building"></i> Naukri Jobs
+                                        </button>
+                                    </a>
+                                    """
+                                st.markdown(naukri_button, unsafe_allow_html=True)
+
                 else:
                     st.warning("Please upload a valid PDF resume.")
         else:
