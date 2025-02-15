@@ -160,9 +160,9 @@ def recommend_jobs(resume_embedding, job_tensors, df, top_n=5):
     return recommended_jobs
 
 # --- New Function to Generate LinkedIn Job Search URL ---
-def generate_linkedin_job_search_url(job_title, skills):
-    """Generates a LinkedIn job search URL for a specific job title and skills."""
-    keywords = f"{job_title}, " + ", ".join(skills)
+def generate_linkedin_job_search_url(job_title):
+    """Generates a LinkedIn job search URL for a specific job title."""
+    keywords = job_title  # Only job title for LinkedIn
     encoded_keywords = urllib.parse.quote_plus(keywords)
     linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_keywords}&location=India"
     return linkedin_url
@@ -219,7 +219,7 @@ with tabs[0]:
                         st.success("Recommended Roles:")
                         for job_title, score in recommended_jobs:
                             linkedin_url = generate_linkedin_job_search_url(
-                                job_title, skills
+                                job_title
                             )  # Generate LinkedIn URL
                             naukri_url = generate_naukri_job_search_url(
                                 job_title
