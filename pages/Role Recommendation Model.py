@@ -174,7 +174,7 @@ def generate_linkedin_job_search_url(job_title):
     """Generates a LinkedIn job search URL for a specific job title."""
     keywords = job_title  # Only job title for LinkedIn
     encoded_keywords = urllib.parse.quote_plus(keywords)
-    linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_keywords}&location=Worldwide"
+    linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_keywords}&location=India"
     return linkedin_url
 
 
