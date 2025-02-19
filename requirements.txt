@@ -1,9 +1,9 @@
-streamlit
-tensorflow
-pandas
-scikit-learn
-joblib
-torch
+streamlit==1.40.1
+tensorflow==2.18.0
+pandas==2.2.3
+scikit-learn==1.5.2
+joblib==1.4.2
+torch==2.5.1
 sentence-transformers
 tf-keras
 gdown
