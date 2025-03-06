@@ -165,7 +165,7 @@ def generate_naukri_job_search_url(job_title):
 def initialize_llm():
     """Initializes the LLM. You'll need a Google AI API key."""
     try:
-        genai.configure(api_key=st.secrets['GEMINI_API_KEY'])  # Store API key securely
+        genai.configure(api_key=st.secrets["GEMINI_API_KEY"])  # Store API key securely
         model = genai.GenerativeModel("gemini-2.0-flash")
         return model
     except Exception as e:
@@ -255,7 +255,9 @@ try:
     with cols[0]:
         st.page_link(page="app.py", icon="🏠", label="Home")
     with cols[1]:
-        st.page_link(page="pages/Promotion Model.py", icon="💹", label="Promotion Model")
+        st.page_link(
+            page="pages/Promotion Model.py", icon="💹", label="Promotion Model"
+        )
     with cols[2]:
         st.page_link(
             page="pages/Role Recommendation Model.py",
@@ -355,7 +357,9 @@ with tabs[0]:  # Resume Upload Tab
                             linkedin_url = generate_linkedin_job_search_url(job_title)
                             naukri_url = generate_naukri_job_search_url(job_title)
 
-                            st.write(f"**{job_title}** - Suitability Score: {score:.1f}")
+                            st.write(
+                                f"**{job_title}** - Suitability Score: {score:.1f}"
+                            )
 
                             col1, col2 = st.columns(2)
                             with col1:
