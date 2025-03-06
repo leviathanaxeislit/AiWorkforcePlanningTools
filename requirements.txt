@@ -8,3 +8,5 @@ sentence-transformers
 tf-keras
 gdown
 PyPDF2
+google-generativeai
+python-docx
