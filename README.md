@@ -92,7 +92,7 @@ Access the application in your browser at `http://localhost:8501`.
 
 -   **Method**: TensorFlow (Keras)
 -   **Purpose**: Predicts employee promotions based on various factors! 🌟
--   **Accuracy**: Achieved an average accuracy of ~75% during training and testing.
+-   **Accuracy**: Achieved an average accuracy of ~91% during training and testing.
 -   **Implementation**: Built using a neural network! 🧠
 
 ### 2. Role Recommendation System
