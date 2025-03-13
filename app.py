@@ -41,11 +41,32 @@ st.image(
 
 st.markdown(
     """
-            AI Workforce Planning Tools is an advanced **AI-powered system** designed to enhance workforce management by utilizing machine learning models for **promotion prediction** and **role recommendation**. By leveraging AI, the tool helps organizations make informed decisions about employee promotions and match resumes with the most suitable roles, improving workforce efficiency and planning.
+    ## 💡 Overview
 
-The project includes:
-- **Promotion Prediction Model**: Predicts employee promotions using a TensorFlow-based neural network model.
-- **Role Recommendation System**: Uses collaborative filtering to recommend role based on resume and job embeddings."""
+AI Workforce Planning Tools is your go-to **AI-powered system** for making smarter workforce decisions! 🌟 Designed to enhance workforce management, it uses machine learning models for **promotion prediction** and intelligent **role recommendation**, now with magical ✨ automated cover letter generation! It helps organizations make data-driven decisions, match awesome talent with the right roles, and simplifies the job application process with AI-generated cover letters! 🚀 Improving workforce efficiency and strategic planning like never before!
+
+What you'll find inside:
+
+-   **Promotion Prediction Model**: 🏆 Accurately predicts employee promotions using a TensorFlow-based neural network model.
+-   **Role Recommendation System**: 🏢 Intelligently recommends suitable roles based on comprehensive resume analysis and job embeddings.
+-   **AI-Powered Cover Letter Generation:** ✍️ Automates the creation of tailored cover letters using Google's Gemini LLM, making job applications a breeze!
+
+## ✨ Key Features
+
+-   **Promotion Prediction**: 📈 Accurately predicts the likelihood of employee promotions based on key factors like department, performance ratings, training scores, and more!
+
+-   **Intelligent Role Recommendations**: 🎯 Analyzes resumes and provides personalized job recommendations, with suitability scores and links to job postings on LinkedIn & Naukri. 💼
+
+-   **AI-Driven Cover Letter Generation**: ✉️ Generates compelling cover letters tailored to specific job descriptions using Google's Gemini LLM. Say goodbye to writer's block! ✍️
+
+-   **Resume Scoring**: 💯 Provides a suitability score for any resume and job description combination! Helping you assess fit at a glance.
+
+-   **Streamlit Interface**: 💻 User-friendly web interface for easy access to all features and models!
+
+-   **Advanced Model Integration**: 🧠 Utilizes state-of-the-art machine learning models built with TensorFlow and PyTorch.
+
+
+            """
 )
 
-st.write("Use the navigation bar  to navigate to different tools.")
+st.markdown("### Use the navigation bar  to navigate to different tools.")
