@@ -126,6 +126,20 @@ Access the application in your browser at `http://localhost:8501`.
 -   **Google Gemini API**
 -   **Google Drive**
 
+## 🚧 System Architecture Diagram
+
+![System Architecture](/architecture%20diagrams/System%20Architecture.png)
+
+## 🚧 ER Diagram
+
+![ER](/architecture%20diagrams/ER%20Diagram%20for%20ai%20workforce%20planning%20tools.png)
+
+## Sequence Diagram
+
+![Sequence](/architecture%20diagrams/sequence%20diagram%20for%20ai%20workforce%20planning%20tools.png)
+
+## DFD Diagram
+![DFD](/architecture%20diagrams/DFD%20for%20ai%20workforce%20planning%20tools.png)
 ## 🔮 Future Improvements (Planned, not in priority)
 
 -   **Fine-Tuning Models**: Improve prediction and recommendation accuracy! 🎯
