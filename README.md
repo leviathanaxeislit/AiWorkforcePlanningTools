@@ -1,17 +1,14 @@
-# ✨ AI Workforce Planning Tools 🚀
+<p align="center"> <h1>✨ AI Workforce Planning Tools 🚀</h1> </p>
 
-<img src="assets/Project Logo.png" width="400" height="400">
+<p align="center">
+<img src="assets/Project Logo.png" width="400" height="400"></center>
+</p>
 
 [![AI Workforce Planning](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aiworkforceplanningtool.streamlit.app/)
-
 [![Docker Pulls](https://img.shields.io/docker/pulls/leviathanaxeislit/aiworkforceplanningtools?style=plastic&logo=docker&logoColor=blue&logoSize=auto)](https://hub.docker.com/repository/docker/leviathanaxeislit/aiworkforceplanningtools/general)
-
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/leviathanaxeislit/AiWorkforcePlanningTools?style=plastic&logo=github)
-
 ![GitHub License](https://img.shields.io/github/license/leviathanaxeislit/AiWorkforcePlanningTools?style=plastic&logo=apachelucene)
-
 ![Docker Image Size](https://img.shields.io/docker/image-size/leviathanaxeislit/aiworkforceplanningtools?arch=amd64&style=plastic&logo=docker)
-
 [![AiWorkforcePlanningTools](https://github.com/leviathanaxeislit/AiWorkforcePlanningTools/actions/workflows/main.yml/badge.svg)](https://github.com/leviathanaxeislit/AiWorkforcePlanningTools/actions/workflows/main.yml)
 
 ## 💡 Overview
