@@ -1,5 +1,7 @@
 # ✨ AI Workforce Planning Tools 🚀
 
+<img src="assets/Project Logo.png" width="400" height="400">
+
 [![AI Workforce Planning](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aiworkforceplanningtool.streamlit.app/)
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/leviathanaxeislit/aiworkforceplanningtools?style=plastic&logo=docker&logoColor=blue&logoSize=auto)](https://hub.docker.com/repository/docker/leviathanaxeislit/aiworkforceplanningtools/general)
@@ -128,18 +130,18 @@ Access the application in your browser at `http://localhost:8501`.
 
 ## 🚧 System Architecture Diagram
 
-![System Architecture](/architecture%20diagrams/System%20Architecture.png)
+![System Architecture](/assets/System%20Architecture.png)
 
 ## 🚧 ER Diagram
 
-![ER](/architecture%20diagrams/ER%20Diagram%20for%20ai%20workforce%20planning%20tools.png)
+![ER](/assets/ER%20Diagram%20for%20ai%20workforce%20planning%20tools.png)
 
 ## Sequence Diagram
 
-![Sequence](/architecture%20diagrams/sequence%20diagram%20for%20ai%20workforce%20planning%20tools.png)
+![Sequence](/assets/sequence%20diagram%20for%20ai%20workforce%20planning%20tools.png)
 
 ## DFD Diagram
-![DFD](/architecture%20diagrams/DFD%20for%20ai%20workforce%20planning%20tools.png)
+![DFD](/assets/DFD%20for%20ai%20workforce%20planning%20tools.png)
 ## 🔮 Future Improvements (Planned, not in priority)
 
 -   **Fine-Tuning Models**: Improve prediction and recommendation accuracy! 🎯
