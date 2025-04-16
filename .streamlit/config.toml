@@ -1,9 +1,10 @@
 [theme]
-primaryColor="#B20710"  
-backgroundColor="#0E0E0E" 
-textColor="#FFFFFF" 
-font="sans serif" 
-secondaryBackgroundColor="#1A1A1A" 
+
+font="sans serif"
+primaryColor="maroon"  # Light Blue (Interactive Elements)
+backgroundColor="#e0e2ed" # White (Main Background)
+secondaryBackgroundColor="#a0b9e0" # Light Gray (Secondary Background)
+textColor="" # Dark Gray (Text Color)
 
 [client]
 showSidebarNavigation = false

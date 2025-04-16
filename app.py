@@ -70,3 +70,24 @@ What you'll find inside:
 )
 
 st.markdown("### Use the navigation bar  to navigate to different tools.")
+st.markdown(
+    """
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #f5f5f5;
+        color: black;
+        text-align: center;
+        padding: 10px;
+        z-index: 1000;
+    }
+    </style>
+    <div><center>
+        <p>Designed and developed with <i class="fas fa-heart" style="color: red;"></i>  by  <a href="https://www.github.com/leviathanaxeislit" target="_blank">Chandra Prakash <i class="fab fa-github"></i></a></p>
+    </center></div>
+    """,
+    unsafe_allow_html=True,
+)
