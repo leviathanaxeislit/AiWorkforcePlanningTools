@@ -10,3 +10,6 @@ gdown
 PyPDF2
 google-generativeai
 python-docx
+docx2txt
+wordcloud
+matplotlib
